@@ -2,9 +2,15 @@ import pymysql
 import pymongo
 import redis
 
-def dbconnect(dbtype, *args, **kwargs):
-	dbdict = {'mongo': pymongo.MongoClient(),
-			  'mysql': pymysql.connect(),
-			  'reids': redis.Redis()}
+"""pymysql.connections
+host, user, port, password"""
+
+
+
+
+def dbconnect(dbtype, host, user, port, password):
+	dbdict = {'mongo': pymongo.MongoClient(host=host, user=user, port=port, password=password),
+			  'mysql': pymysql.connect(host=host, user=user, port=port, password=password),
+			  'reids': redis.Redis(host=host, user=user, port=port, password=password)}
 	return dbdict[dbtype]
 
