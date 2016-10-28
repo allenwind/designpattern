@@ -40,7 +40,8 @@ class Widget:
 
     def handle(self, event): 
         #关联关系用于表明Widget类知道Event类
-        #核心在这里
+        #核心在这里,handle方法用于连接责任链上
+        #的方法。这些方法依据设计分布在不同的子类中
         handler = 'handle_{}'.format(event)
         if hasattr(self, handler):
             method = getattr(self, handler)
