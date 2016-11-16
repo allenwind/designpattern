@@ -1,3 +1,4 @@
 pattern/
 *.pyc
 *.pyo
+__pycache__/
