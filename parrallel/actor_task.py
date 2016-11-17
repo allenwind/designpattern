@@ -9,18 +9,16 @@ class ActorExit(Exception):
     pass
 
 class Actor:
-    _qsize = 10
+    _qsize = 100
     
     def __init__(self):
         self._mailbox = Queue(self._qsize)
         self._result = []
 
     def send(self, msg, *args, **kwargs):
-        time.sleep(random.random()) #sleep random
         self._mailbox.put((msg, args, kwargs))
 
     def recv(self):
-        time.sleep(random.random())
         msg = self._mailbox.get(block=True)
         
         if msg is ActorExit:
@@ -58,10 +56,10 @@ class Actor:
         for item in self._result:
             print(item)
 
-    def submit(self, func, *args, **kwargs): #like concurrent.futures submit
+    def submit(self, func, *args, **kwargs):
         self.send(func, *args, **kwargs)
         
-def countdown(n, interval=0.3): #for test
+def countdown(n, interval=0.3): 
     while n > 0:
         time.sleep(interval)
         n -= 1
@@ -75,7 +73,7 @@ class ActorTask(Actor):
     def run(self):
         while True:
             task, args, kwargs = self.recv()
-            if task.startswith('do_'):  #use inner task
+            if task.startswith('do_'): 
                 task = getattr(self, task)
             result = task(*args, **kwargs)
             self.add_result((task.__name__, result))
