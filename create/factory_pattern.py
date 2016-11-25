@@ -2,7 +2,9 @@ import xml.etree.ElementTree as etree
 import json
 import sqlite3
 
-#factory method
+"""工厂模式:
+通过对输入内容的特征进行判断，创建具体的合适的对象
+下面以文件连接器为例"""
 
 class JSONConnector:
 	def __init__(self, filepath):
@@ -23,8 +25,13 @@ class XMLConnector:
 		return self.tree
 
 class SQLConnector:
-	def __init__(self.filepath):
-		pass
+	def __init__(self, filepath):
+		self.cursor = sqlite3.connect(filepath)
+
+	@property
+	def parsed_data(self):
+		return self.cursor.execute("SELECT * FROM db")
+	
 
 def factory(filepath):
 	if filepath.endswith('json'):
@@ -44,3 +51,23 @@ def connection(filepath):
 	except ValueError as error:
 		print(error)
 	return factory
+
+
+
+
+"""类似的例子，根据数据库连接类型的不同，创建不同的连接实例"""
+
+def dbconnect(db, host, user, port, password):
+	
+	import pymysql
+    import pymongo
+	import redis
+
+	type_ = {'mongo': pymongo.MongoClient(host=host, user=user, 
+		                                   port=port, password=password),
+			  'mysql': pymysql.connect(host=host, user=user, 
+			  	                       port=port, password=password),
+			  'reids': redis.Redis(host=host, user=user, 
+			  	                   port=port, password=password)}
+	return type_[db]
+

@@ -1,3 +1,7 @@
+"""单例模式:
+下面这个类只能实例化一次,或者多，可以多次调用，但只创建一个实例"""
+
+
 class Singleton(type):
     def __init__(self, *args, **kwargs):
         self.__instance = None
@@ -14,4 +18,6 @@ class Spam(metaclass=Singleton):
     def __init__(self):
         print('creating spam')
 
+
+print(Spam() is Spam()) #True
         

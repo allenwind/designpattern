@@ -7,17 +7,19 @@
 
 模式中，有两个参与者：建造者 （builder）和指挥者（director）
 
-
-区别在于工厂模式以单个步
+区分工厂模式和建造者模式,区别在于工厂模式以单个步
 骤创建对象，而建造者模式以多个步骤创建对象，并且几乎始终会使用一个指挥者
 
 在工厂模式下，会立即返回一个创建好的对象；而在建造者模式下，仅在需
 要时客户端代码才显式地请求指挥者返回最终的对象
-
-
 """
 
-#区分工厂模式和建造者模式
+"""过程描述：
+建立一个模板，在建立比模板更具体的模板时，实例化模板而不是继承，
+在具体的模板中添加实例方法对模板实例的数据进行操作。这是一个建
+立的过程。而具体的建立地点委托给指挥者。"""
+
+
 
 MINI14 = '1.4GHz Mac mini'
 
@@ -214,56 +216,6 @@ def main():
     print(pizza)
 
 
-
-"""一种变体实现
-一种有趣的建造者模式变体，这种
-变体会链式地调用建造者方法，通过将建造者本身定义为内部类并从其每个设置器方法返回自身
-来实现。方法build()返回最终的对象。这个模式被称为流利的建造者"""
-class Pizza_:
-    #这是一个绝妙的方法
-    def __init__(self, builder):
-        self.garlic = builder.garlic
-        self.extra_cheese = builder.extra_cheese
-
-    def __str__(self):
-        garlic = 'yes' if self.garlic else 'no'
-        cheese = 'yes' if self.extra_cheese else 'no'
-        info = ('Garlic: {}'.format(garlic), 'Extra cheese: {}'.format(cheese))
-        return '\n'.join(info)
-
-    class PizzaBuilder:
-        def __init__(self):
-            self.extra_cheese = False
-            self.garlic = False
-
-        def add_garlic(self):
-            self.garlic = True
-            return self
-
-        def add_extra_cheese(self):
-            self.extra_cheese = True  #方法可以互换
-            return self
-
-        def build(self):
-            return Pizza(self)
-
-#过程描述
-#建立一个模板，在建立比模板更具体的模板时，实例化模板而不是继承，
-#在具体的模板中添加实例方法对模板实例的
-#数据进行操作。这是一个建立的过程。而具体的建立地点委托给指挥者。
-
-class Builder_:
-    def __init__(self):
-        self._list = []
-
-    def add(self, target):
-        self._list.append(target)
-        return self
-
-
-if __name__ == '__main__':
-    main()
-    pizza = Pizza_.PizzaBuilder().add_garlic().add_extra_cheese().build()
 
 """工厂模式相比，建造者模式
 是更好的选择。

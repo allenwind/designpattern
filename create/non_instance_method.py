@@ -1,4 +1,4 @@
-from urllib.request import Request
+"""控制类不能实例化"""
 
 class NoInstance(type):
     def __call__(self, *args, **kwargs):
