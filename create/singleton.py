@@ -14,6 +14,20 @@ class Singleton(type):
         else:
             return self.__instance
 
+"""实现缓存类"""
+
+class Cached(type):
+    def __init__(self, name):
+        self._name = name
+        self.__cached = {}
+        super().__init__(name)
+
+    def __call__(self, *args, **kwargs):
+        if self._name in self.__cached:
+            return self.__cached[name]
+        else:
+            super().__call__(*args, **kwargs)
+
 class Spam(metaclass=Singleton):
     def __init__(self):
         print('creating spam')
