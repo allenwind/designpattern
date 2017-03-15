@@ -2,9 +2,11 @@ import xml.etree.ElementTree as etree
 import json
 import sqlite3
 
-"""工厂模式:
+"""
+工厂模式:
 通过对输入内容的特征进行判断，创建具体的合适的对象
-下面以文件连接器为例"""
+下面以文件连接器为例
+"""
 
 class JSONConnector:
 	def __init__(self, filepath):
@@ -52,10 +54,11 @@ def connection(filepath):
 		print(error)
 	return factory
 
+"""
+类似的例子，根据数据库连接类型的不同，创建不同的连接实例
+根据用户输入的类型，创建不同的数据库连接
 
-
-
-"""类似的例子，根据数据库连接类型的不同，创建不同的连接实例"""
+"""
 
 def dbconnect(db, host, user, port, password):
 	

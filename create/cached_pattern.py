@@ -1,6 +1,7 @@
 import weakref
 
-"""缓存模式:
+"""
+缓存模式:
 下面这个例子是基于类的名字的缓存
 当然，也可以对其他属性进行缓存，但用名字更直观、直接了当
 
@@ -30,4 +31,13 @@ class Spam(metaclass=Cached):
     def __init__(self, name):
         print('Creating Spam({!r})'.format(name))
         self.name = name
+
+if __name__ == '__main__':
+    foo = Spam("foo")
+    bar = Spam("bar")
+    foo2 = Spam("foo")
+
+    bar == boo #False
+
+    boo2 == foo #True
 
