@@ -1,3 +1,3 @@
-####各种设计模式的实现
+各种设计模式的实现
 
-![design pattern](/src/ds.png)
+<img src="/src/dp.png"/>
