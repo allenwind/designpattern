@@ -24,47 +24,25 @@ MVC并非是仅有的发布—订阅例子。信息聚合订阅（比如， RSS�
 
 
 
+class Publisher:
+	def __init__(self):
+		self.observers = []
 
+	def add(self, observer):
+		if observer not in self.observers:
+			self.observers.append(observer)
+		else:
+			print("fail to add: {}".format(observer))
 
+	def remove(self, observer):
+		try:
+			self.observers.remove(observer)
+		except ValueError:
+			print("fail to remove: {}".format(observer))
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	def notify(self):
+		for object_ in self.observers:
+			object_.notify(self)
 
 class Node:
 	pass
@@ -96,4 +74,8 @@ class Negate(UnaryOperator):
 class Number(Node):
 	def __init__(self, value):
 		self.value = value
-		
+
+t1 = Sub(Number(4), Number(4))
+t2 = Mul(Number(2), t1)
+t3 = Div(t2, Number(5))
+t4 = Add(Number(1), t3)		

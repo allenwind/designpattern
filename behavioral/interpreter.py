@@ -17,12 +17,23 @@
 
 #使用巴科斯-诺尔形式（Backus-Naur Form， BNF）表示法来定义语法:
 
-"""event ::= command token receiver token arguments
+"""
+语法定义
+event ::= command token receiver token arguments
 command ::= word+
 word ::= a collection of one or more alphanumeric characters
 token ::= ->
 receiver ::= word+
-arguments ::= word+"""
+arguments ::= word+
+
+"""
+
+
+"""解析器模式负责把特定的符号序列进行解析，转换到宿主语言的具体操作上
+相当于翻译的过程，把一种符号翻译到另外一种符号，但语义相同
+
+"""
+
 
 from pyparsing import Word, OneOrMore, Optional, Group, Suppress, alphanums
 
