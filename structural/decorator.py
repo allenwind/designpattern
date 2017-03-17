@@ -98,6 +98,62 @@ def decorator3(func):
 def func():
     pass
 
+def timethis(func):
+    @functools.wraps(func)
+    def wrapper(*args, **kwargs):
+        start = time.time()
+        resutl = func(*args, **kwargs)
+        end = time.time()
+        elapsed = end - start
+        print("elapsed time is {}".format(elapsed))
+        return resutl
+    return wrapper
+
+def set_delay(delay=0):
+    def delay(func):
+        @functools.wraps(func)
+        def wrapper(*args, **kwargs):
+            time.sleep(delay)
+            result = func(*args, **kwargs)
+            return result
+
+        return wrapper
+    return delay
+
+def set_log(logpath=0, type="debug"):
+    def log(func):
+        @functools.wraps(func):
+        def wrapper(*args, **kwargs):
+            logger = logging.Logger("func_logging")
+            result = func(*args, **kwargs)
+            if type == "debug":
+                logger.debug(result)
+            return result
+        return wrapper
+
+    return log
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 if __name__ == '__main__':
     t_navie = timeit.Timer('fibonacci_naive(8)', 'from __main__ import fibonacci_naive')
     
