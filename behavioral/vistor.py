@@ -21,6 +21,9 @@ MVC并非是仅有的发布—订阅例子。信息聚合订阅（比如， RSS�
 社交网络、事件驱动系统、系统终端（DMA）
 
 vistor ~ pub/sub pattern
+
+
+
 """
 
 
