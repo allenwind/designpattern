@@ -26,3 +26,24 @@
 """Thomas Jaeger说过的一句话：“状态设计模式解决的是一定上下文中无限数量状态
 的完全封装，从而实现更好的可维护性和灵活性。”"""
 
+def task():
+    while True:
+        print("task run")
+        yield
+
+
+import collections
+
+deque = collections.deque()
+
+def main():
+    try:
+        while True:
+            task = deque.pop()
+            next(task)
+    except IteratorException:
+        pass
+
+if __name__ == '__main__':
+    main()
+
